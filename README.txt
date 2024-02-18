@@ -1,0 +1,29 @@
+
+== Запуск и настройка Keycloak
+
+.Команда запуска Keycloak в Docker
+[source,shell]
+----
+docker run --name keycloak -p 18080:8080 \
+  -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=keycloak \
+  -v ./config/keycloak:/opt/keycloak/data/import \
+  quay.io/keycloak/keycloak:23.0.6 \
+  start-dev
+----
+
+.Использованные флаги
+|===
+|Флаг |Назначение
+
+|`--name`
+|Название контейнера
+
+|`-p 18080:8080`
+|Проброс порта 8080 из контейнера на порт 18080 хост-системы
+
+|`-e`
+|Переменные окружения KEYCLOAK_ADMIN и KEYCLOAK_ADMIN_PASSWORD
+
+|`-v ./config/keycloak:/opt/keycloak/data/import`
+|Проброс директории `config/keycloak` проекта в директорию `/opt/keycloak/data/import` контейнера для импорта и экспорта настроек пространства
+|===
